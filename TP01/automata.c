@@ -12,16 +12,35 @@
 #include <string.h>
 
 int clearScreen();
-
+int writeFile(char fileName[]);
+int readFile(char fileName[]);
 
 int main(){
     clearScreen();
 
+    printf("%c","Creando un archivo .txt...");
+    writeFile("text.txt");
+
+
+    return 0;
+}
+
+
+int clearScreen(){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+    return 0;
+}
+
+int readFile(char fileName[]){
+    
     FILE* ptr;
     char ch;
      
-    // Abro el archivo de texto
-    ptr = fopen("text.txt", "r");
+    ptr = fopen(fileName, "r"); // "r" defino "read mode"
  
     if (NULL == ptr) {
         printf("file can't be opened \n");
@@ -41,13 +60,20 @@ int main(){
     return 0;
 }
 
+int writeFile(char fileName[]){
 
-int clearScreen(){
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
+    int i=0;
+    FILE * fptr;
+    char fn[50];
+    char str[] = "Escribo desde C\n";
+
+    fptr = fopen(fileName, "w"); // "w" defino "writing mode"
+            
+    for (i = 0; str[i] != '\n'; i++) {
+        /* write to file using fputc() function */
+        fputc(str[i], fptr);
+    }
+    fclose(fptr);
+
     return 0;
 }
-
