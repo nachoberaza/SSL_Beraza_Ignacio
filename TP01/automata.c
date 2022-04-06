@@ -17,9 +17,8 @@ int readFile(char fileName[]);
 
 int main(){
     clearScreen();
-
-    printf("%c","Creando un archivo .txt...");
-    writeFile("text.txt");
+    writeFile("cacho.txt");
+    
 
 
     return 0;
@@ -65,14 +64,15 @@ int writeFile(char fileName[]){
     int i=0;
     FILE * fptr;
     char fn[50];
-    char str[] = "Escribo desde C\n";
+    char str[] = "Escribo desde C";
 
     fptr = fopen(fileName, "w"); // "w" defino "writing mode"
-            
-    for (i = 0; str[i] != '\n'; i++) {
-        /* write to file using fputc() function */
+
+    while (i < strlen(str)){
         fputc(str[i], fptr);
-    }
+        i++;
+    };
+
     fclose(fptr);
 
     return 0;
